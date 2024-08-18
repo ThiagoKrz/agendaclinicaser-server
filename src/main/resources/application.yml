@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: uniforum
+  profiles:
+    active: "@activatedProperties@"
