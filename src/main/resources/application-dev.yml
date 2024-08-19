@@ -18,12 +18,16 @@ server:
   max-http-request-header-size: 1MB
 
 logging:
-  charset:
-    file: logs/homolog/application_dev.log
+  file:
+    name: logs/homolog/application_dev.log
   pattern:
     console: "%d %-5level %logger : %msg%n"
     file: "%d %-5level [%thread] %logger : %msg%n"
   level:
-    web: ERROR
-    root: DEBUG
-    sql: ERROR
+    org.springframework.web: ERROR
+    com.nexcodelab: DEBUG
+    org.hibernate: ERROR
+
+jwt:
+  secret: uniforum
+  expiration: 2592000000 # 30 days or 2592000000 milisecs
