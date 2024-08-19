@@ -1,68 +1,39 @@
 package com.nexcodelab.uniforum.usuario.model;
 
 import com.nexcodelab.uniforum.core.model.EntidadeBase;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import lombok.Data;
+import com.nexcodelab.uniforum.shared.enums.Curso;
+import com.nexcodelab.uniforum.shared.enums.TipoUsuario;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Data
-@NoArgsConstructor
-public abstract class Usuario extends EntidadeBase implements UserDetails {
+@Getter
+@NoArgsConstructor @AllArgsConstructor
+public class Usuario extends EntidadeBase{
     @Column(length = 45, nullable = false)
     private String email;
 
-    @Column(length = 45, nullable = false)
-    private String senha;
+    @Column(length = 90, nullable = false)
+    private String password;
 
-    public Usuario(String email, String senha) {
-        super();
+    @Enumerated(EnumType.STRING)
+    private Curso curso;
+
+    private Integer periodo;
+
+    @OneToOne
+    @JoinColumn(name = "dados_pessoais_id")
+    private DadosPessoais dadosPessoais;
+
+    private TipoUsuario tipoUsuario;
+
+
+    public Usuario(String email, String password, TipoUsuario tipoUsuario) {
         this.email = email;
-        this.senha = senha;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
-    public String getPassword() {
-        return this.senha;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+        this.password = password;
+        this.tipoUsuario = tipoUsuario;
     }
 
 }
