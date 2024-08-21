@@ -1,4 +1,4 @@
-package com.nexcodelab.uniforum.usuario.dto.request;
+package com.nexcodelab.uniforum.authentication.dto.request;
 
 import com.nexcodelab.uniforum.shared.enums.Sexo;
 import com.nexcodelab.uniforum.shared.enums.TipoUsuario;

@@ -1,9 +1,9 @@
-package com.nexcodelab.uniforum.usuario.controller;
+package com.nexcodelab.uniforum.authentication.controller;
 
-import com.nexcodelab.uniforum.usuario.dto.request.LoginRequest;
-import com.nexcodelab.uniforum.usuario.dto.request.SignUpRequest;
-import com.nexcodelab.uniforum.usuario.dto.response.JwtResponse;
-import com.nexcodelab.uniforum.usuario.service.AuthenticationService;
+import com.nexcodelab.uniforum.authentication.dto.request.LoginRequest;
+import com.nexcodelab.uniforum.authentication.dto.request.SignUpRequest;
+import com.nexcodelab.uniforum.authentication.dto.response.JwtResponse;
+import com.nexcodelab.uniforum.authentication.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

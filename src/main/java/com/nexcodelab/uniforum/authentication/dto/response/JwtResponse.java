@@ -1,9 +1,7 @@
-package com.nexcodelab.uniforum.usuario.dto.response;
+package com.nexcodelab.uniforum.authentication.dto.response;
 
 import com.nexcodelab.uniforum.shared.enums.TipoUsuario;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class JwtResponse {

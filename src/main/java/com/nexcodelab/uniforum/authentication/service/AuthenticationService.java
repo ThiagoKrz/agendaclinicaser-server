@@ -1,15 +1,15 @@
-package com.nexcodelab.uniforum.usuario.service;
+package com.nexcodelab.uniforum.authentication.service;
 
 import com.nexcodelab.uniforum.core.security.jwt.JwtUtils;
 import com.nexcodelab.uniforum.core.security.service.UserDetailsImpl;
-import com.nexcodelab.uniforum.usuario.dto.request.LoginRequest;
-import com.nexcodelab.uniforum.usuario.dto.request.SignUpRequest;
-import com.nexcodelab.uniforum.usuario.dto.response.JwtResponse;
+import com.nexcodelab.uniforum.authentication.dto.request.LoginRequest;
+import com.nexcodelab.uniforum.authentication.dto.request.SignUpRequest;
+import com.nexcodelab.uniforum.authentication.dto.response.JwtResponse;
 import com.nexcodelab.uniforum.shared.enums.TipoUsuario;
 import com.nexcodelab.uniforum.usuario.model.DadosPessoais;
 import com.nexcodelab.uniforum.usuario.model.Usuario;
 import com.nexcodelab.uniforum.usuario.repository.DadosPessoaisRepository;
-import com.nexcodelab.uniforum.usuario.repository.UsuarioRepository;
+import com.nexcodelab.uniforum.authentication.repository.AuthenticationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UsuarioRepository usuarioRepository;
+    private final AuthenticationRepository authenticationRepository;
     private final DadosPessoaisRepository dadosPessoaisRepository;
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
@@ -31,7 +31,7 @@ public class AuthenticationService {
 
     @Transactional
     public void register (SignUpRequest request) {
-        if (usuarioRepository.existsByEmail(request.getEmail())) {
+        if (authenticationRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Error: Email is already taken!");
         }
 
@@ -39,7 +39,7 @@ public class AuthenticationService {
                 new DadosPessoais(request.getNome(), request.getSobrenome(), request.getDataNascimento(), request.getSexo()));
 
         TipoUsuario tipoUsuario = request.getTipoUsuario() == null ? TipoUsuario.DISCENTE : request.getTipoUsuario();
-        usuarioRepository.save(new Usuario(request.getEmail(), encoder.encode(request.getPassword()),dadosPessoais,  tipoUsuario));
+        authenticationRepository.save(new Usuario(request.getEmail(), encoder.encode(request.getPassword()),dadosPessoais,  tipoUsuario));
     }
 
 

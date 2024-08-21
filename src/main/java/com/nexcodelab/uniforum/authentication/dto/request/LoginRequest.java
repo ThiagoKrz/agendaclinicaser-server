@@ -1,4 +1,4 @@
-package com.nexcodelab.uniforum.usuario.dto.request;
+package com.nexcodelab.uniforum.authentication.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
