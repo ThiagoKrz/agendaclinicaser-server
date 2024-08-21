@@ -31,7 +31,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(jwtResponse);
     }
 
-    @PostMapping("/verify-email-avaliable")
+    @PostMapping("/verify-email-available")
     public ResponseEntity<Boolean> verifyEmailAvailable(@RequestParam String email) {
         Boolean response = authenticationService.verifyEmailAvailable(email);
         return ResponseEntity.ok(response);
