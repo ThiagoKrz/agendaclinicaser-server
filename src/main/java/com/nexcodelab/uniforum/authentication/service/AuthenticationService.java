@@ -67,4 +67,9 @@ public class AuthenticationService {
 
         return jwtResponse;
     }
+
+    public Boolean verifyEmailAvailable(String email) {
+        return !authenticationRepository.existsByEmail(email);
+    }
+
 }
