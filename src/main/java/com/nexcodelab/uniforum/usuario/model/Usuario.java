@@ -47,10 +47,15 @@ public class Usuario extends EntidadeBase{
     private Boolean deleted = Boolean.FALSE;
 
 
-    public Usuario(String email, String password, TipoUsuario tipoUsuario) {
+    public Usuario(String email, String password, DadosPessoais dadosPessoais, TipoUsuario tipoUsuario) {
         this.email = email;
         this.password = password;
+        this.dadosPessoais = dadosPessoais;
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getNomeCompleto(){
+        return this.dadosPessoais.getNome() + " " + this.dadosPessoais.getSobrenome();
     }
 
 }

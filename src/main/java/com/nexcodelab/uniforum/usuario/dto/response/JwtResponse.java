@@ -8,14 +8,10 @@ import java.util.List;
 @Data
 public class JwtResponse {
 	private String accessToken;
-	private Long id;
-	private String email;
-    private TipoUsuario tipoUsuario;
+	private LoggedUserResponse user;
 
-	public JwtResponse(String accessToken, Long id, String email, TipoUsuario tipoUsuario) {
+	public JwtResponse(String accessToken, Long id, String nomeCompleto, TipoUsuario tipoUsuario) {
 		this.accessToken = accessToken;
-		this.id = id;
-		this.email = email;
-		this.tipoUsuario = tipoUsuario;
+		this.user = new LoggedUserResponse(id, nomeCompleto, tipoUsuario);
 	}
 }
