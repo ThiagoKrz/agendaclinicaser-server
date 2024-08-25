@@ -29,5 +29,5 @@ logging:
     org.hibernate: ERROR
 
 jwt:
-  secret: uniforum
+  secret: agendaclinicaser
   expiration: 2592000000 # 30 days or 2592000000 milisecs
