@@ -39,7 +39,7 @@ public class JwtUtils {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(authToken);
             return true;
-        }  catch (MalformedJwtException e) {
+        } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
             logger.error("JWT token is expired: {}", e.getMessage());
@@ -52,16 +52,16 @@ public class JwtUtils {
         return false;
     }
 
-    public String getUserNameFromJwtToken (String authToken) {
+    public String getUserNameFromJwtToken(String authToken) {
         return extractClaims(authToken, Claims::getSubject);
     }
 
-    private <T> T extractClaims(String authToken, Function<Claims, T> claimsTFunction){
+    private <T> T extractClaims(String authToken, Function<Claims, T> claimsTFunction) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(authToken);
         return claimsTFunction.apply(claims.getBody());
     }
 
-    public String getToken(HttpServletRequest request) {
+    public String getJwtToken(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 
         if (!Validations.isEmpty(headerAuth) && headerAuth.startsWith("Bearer ")) {
@@ -70,8 +70,4 @@ public class JwtUtils {
 
         return null;
     }
-
-//    public boolean isTokenExpired(String token){
-//        return extractClaims(token, Claims::getExpiration).before(new Date());
-//    }
 }

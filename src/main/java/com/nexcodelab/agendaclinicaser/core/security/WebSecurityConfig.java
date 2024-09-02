@@ -33,8 +33,8 @@ public class WebSecurityConfig{
     public static final String[] ALLOWED_HEADERS = {"Authorization", "content-type"};
 
     private final UserDetailsServiceImpl userDetailsService;
+
     private final JwtFilter jwtFilter;
-//    private final AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -60,14 +60,13 @@ public class WebSecurityConfig{
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
-//                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .authenticationEntryPoint((req, resp, e) ->
                                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/autenticacao/**").permitAll()
                         .anyRequest().authenticated()
                 );
 
@@ -95,4 +94,3 @@ public class WebSecurityConfig{
         return source;
     }
 }
-

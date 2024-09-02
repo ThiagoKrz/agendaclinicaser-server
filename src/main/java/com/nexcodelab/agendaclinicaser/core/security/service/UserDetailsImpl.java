@@ -1,46 +1,39 @@
 package com.nexcodelab.agendaclinicaser.core.security.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nexcodelab.agendaclinicaser.usuario.model.Usuario;
+import com.nexcodelab.agendaclinicaser.application.user.usuario.model.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;
 
-    private String email;
+    private String username;
 
     @JsonIgnore
     private String password;
 
-
-    private String nomeCompleto;
-
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String email, String password, String nomeCompleto, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.authorities = authorities;
-        this.nomeCompleto = nomeCompleto;
     }
 
     public static UserDetailsImpl build(Usuario user) {
-        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority(user.getTipoUsuario().name()));
+        List<GrantedAuthority> authorities = user.getPerfilAcesso().getPermissoes().stream()
+                .map(permissao -> new SimpleGrantedAuthority(permissao.getNome()))
+                .collect(Collectors.toList());
 
-        return new UserDetailsImpl(
-                user.getId(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getNomeCompleto(),
-                authorities);
+        return new UserDetailsImpl( user.getId(), user.getUsername(), user.getPassword(), authorities);
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -51,10 +44,6 @@ public class UserDetailsImpl implements UserDetails {
         return id;
     }
 
-    public String getNomeCompleto() {
-        return this.nomeCompleto;
-    }
-
     @Override
     public String getPassword() {
         return password;
@@ -62,7 +51,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

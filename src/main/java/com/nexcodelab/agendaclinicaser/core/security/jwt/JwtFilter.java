@@ -20,7 +20,6 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
     private final JwtUtils jwtUtils;
@@ -33,7 +32,7 @@ public class JwtFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
         try {
-            String jwt = jwtUtils.getToken(request);
+            String jwt = jwtUtils.getJwtToken(request);
 
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
