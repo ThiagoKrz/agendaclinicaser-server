@@ -4,8 +4,7 @@ import com.nexcodelab.agendaclinicaser.core.security.service.UserDetailsImpl;
 import com.nexcodelab.agendaclinicaser.shared.utils.Validations;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -13,10 +12,9 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.function.Function;
 
+@Log4j2
 @Component
 public class JwtUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-
     @Value("${jwt.secret}")
     private String secret;
 
@@ -39,29 +37,29 @@ public class JwtUtils {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(authToken);
             return true;
-        }  catch (MalformedJwtException e) {
-            logger.error("Invalid JWT token: {}", e.getMessage());
+        } catch (MalformedJwtException e) {
+            log.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
-            logger.error("JWT token is expired: {}", e.getMessage());
+            log.error("JWT token is expired: {}", e.getMessage());
         } catch (UnsupportedJwtException e) {
-            logger.error("JWT token is unsupported: {}", e.getMessage());
+            log.error("JWT token is unsupported: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
-            logger.error("JWT claims string is empty: {}", e.getMessage());
+            log.error("JWT claims string is empty: {}", e.getMessage());
         }
 
         return false;
     }
 
-    public String getUserNameFromJwtToken (String authToken) {
+    public String getUserNameFromJwtToken(String authToken) {
         return extractClaims(authToken, Claims::getSubject);
     }
 
-    private <T> T extractClaims(String authToken, Function<Claims, T> claimsTFunction){
+    private <T> T extractClaims(String authToken, Function<Claims, T> claimsTFunction) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(authToken);
         return claimsTFunction.apply(claims.getBody());
     }
 
-    public String getToken(HttpServletRequest request) {
+    public String getJwtToken(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 
         if (!Validations.isEmpty(headerAuth) && headerAuth.startsWith("Bearer ")) {
@@ -70,8 +68,4 @@ public class JwtUtils {
 
         return null;
     }
-
-//    public boolean isTokenExpired(String token){
-//        return extractClaims(token, Claims::getExpiration).before(new Date());
-//    }
 }
