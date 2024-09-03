@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/autenticacao")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class CadastrarSupervisorController {
     private final CadastrarPersonaUseCase<Supervisor> service;

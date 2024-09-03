@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor @AllArgsConstructor
 public class Telefone {
-
-    private String codigoDoPais;
     private String ddd;
     private String numeroTelefone;
-    private String ramal;
 }

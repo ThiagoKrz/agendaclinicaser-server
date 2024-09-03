@@ -30,9 +30,6 @@ public abstract class Persona extends EntityBase {
     @Column(length = 90, nullable = false)
     private String email;
 
-//    @Column(nullable = false)
-//    @Embedded private Endereco endereco;
-
-//    @Column(nullable = false)
-//    @Embedded private Telefone telefone;
+    @Column(nullable = false)
+    @Embedded private Telefone telefone;
 }
