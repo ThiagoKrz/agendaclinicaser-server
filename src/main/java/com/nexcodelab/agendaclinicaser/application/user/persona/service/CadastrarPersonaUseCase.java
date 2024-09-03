@@ -31,7 +31,9 @@ public class CadastrarPersonaUseCase<T extends Persona> {
                 request.getSobrenome(),
                 request.getDataNascimento(),
                 request.getSexo(),
-                request.getEmail()
+                request.getEmail(),
+                request.getDdd(),
+                request.getNumeroTelefone()
         );
 
         return cadastrar((T) paciente);
@@ -47,7 +49,9 @@ public class CadastrarPersonaUseCase<T extends Persona> {
                 request.getSobrenome(),
                 request.getDataNascimento(),
                 request.getSexo(),
-                request.getEmail()
+                request.getEmail(),
+                request.getDdd(),
+                request.getNumeroTelefone()
         );
 
         return cadastrar((T) estagiario);
@@ -61,7 +65,9 @@ public class CadastrarPersonaUseCase<T extends Persona> {
                 request.getSobrenome(),
                 request.getDataNascimento(),
                 request.getSexo(),
-                request.getEmail()
+                request.getEmail(),
+                request.getDdd(),
+                request.getNumeroTelefone()
         );
 
         return cadastrar((T) supervisor);
@@ -76,7 +82,9 @@ public class CadastrarPersonaUseCase<T extends Persona> {
                 request.getSobrenome(),
                 request.getDataNascimento(),
                 request.getSexo(),
-                request.getEmail()
+                request.getEmail(),
+                request.getDdd(),
+                request.getNumeroTelefone()
         );
 
         return cadastrar((T) colaborador);
