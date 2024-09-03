@@ -28,16 +28,4 @@ public class CadastrarEstagiarioController {
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
-    private static Colaborador toColaborador(CadastrarColaboradorRequest request, Usuario usuario) {
-        return new Colaborador(
-                usuario,
-                request.getNome(),
-                request.getSobrenome(),
-                request.getDataNascimento(),
-                request.getSexo(),
-                request.getEmail()
-        );
-    }
-
 }

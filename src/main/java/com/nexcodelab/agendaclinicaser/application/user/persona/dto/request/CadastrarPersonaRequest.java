@@ -27,4 +27,10 @@ public abstract class CadastrarPersonaRequest {
 
     @NotEmpty @Size(max = 90)
     String email;
+
+    @NotEmpty @Size(max = 2)
+    String ddd;
+
+    @NotEmpty @Size(max = 11)
+    String numeroTelefone;
 }
