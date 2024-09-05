@@ -1,4 +1,4 @@
-package com.nexcodelab.agendaclinicaser.application.user.paciente.controller;
+package com.nexcodelab.agendaclinicaser.application.user.paciente.controller.command;
 
 import com.nexcodelab.agendaclinicaser.application.user.paciente.dto.request.CadastrarPacienteRequest;
 import com.nexcodelab.agendaclinicaser.application.user.paciente.model.Paciente;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping
 @RequiredArgsConstructor
 public class CadastrarPacienteController {
 
