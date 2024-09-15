@@ -14,7 +14,7 @@ public class CadastrarSupervisorUseCase extends CadastrarPersonaUseCase<Supervis
     private final CadastrarUsuarioUseCase cadastrarUsuarioUseCase;
 
     public Supervisor execute(CadastrarSupervisorRequest request) {
-        Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), request.getPerfilAcessoId());
+        Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), request.getRole());
 
         return super.execute(toSupervisor(request, usuario));
     }

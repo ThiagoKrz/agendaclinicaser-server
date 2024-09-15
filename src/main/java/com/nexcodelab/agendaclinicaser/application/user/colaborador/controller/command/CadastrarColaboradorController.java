@@ -1,9 +1,8 @@
-package com.nexcodelab.agendaclinicaser.application.user.colaborador.controller;
+package com.nexcodelab.agendaclinicaser.application.user.colaborador.controller.command;
 
 import com.nexcodelab.agendaclinicaser.application.user.colaborador.dto.request.CadastrarColaboradorRequest;
 import com.nexcodelab.agendaclinicaser.application.user.colaborador.model.Colaborador;
 import com.nexcodelab.agendaclinicaser.application.user.colaborador.service.CadastrarColaboradorUseCase;
-import com.nexcodelab.agendaclinicaser.application.user.persona.service.CadastrarPersonaUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -7,5 +7,5 @@ import java.util.List;
 @Value
 public class LoggedUserResponse {
     Long id;
-    List<String> permissoes;
+    List<String> roles;
 }

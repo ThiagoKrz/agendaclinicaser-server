@@ -1,5 +1,6 @@
 package com.nexcodelab.agendaclinicaser.application.user.usuario.model;
 
+import com.nexcodelab.agendaclinicaser.application.user.usuario.model.enums.Role;
 import com.nexcodelab.agendaclinicaser.shared.model.EntityBase;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,8 +17,8 @@ public class Usuario extends EntityBase {
     @Column(length = 90, nullable = false)
     private String password;
 
-    @ManyToOne
-    private PerfilAcesso perfilAcesso;
+    @Enumerated(EnumType.STRING)
+    Role role;
 
     private Boolean primeiroAcesso = true;
 }
