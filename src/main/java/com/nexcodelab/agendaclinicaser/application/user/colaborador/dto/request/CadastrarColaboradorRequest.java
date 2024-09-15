@@ -9,7 +9,7 @@ import lombok.Value;
 
 @Value
 public class CadastrarColaboradorRequest extends CadastrarPersonaRequest {
-    @Email @NotNull @Size(max = 90)
+    @NotNull @Size(max = 90)
     String username;
 
     @NotEmpty @Size(max = 90)

@@ -15,7 +15,7 @@ public class PerfilAcesso extends EntityBase {
     @Column(length = 90, nullable = false)
     String nome;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(  name = "perfil_acesso_permissoes",
             joinColumns = @JoinColumn(name = "perfil_acesso_id"),
             inverseJoinColumns = @JoinColumn(name = "permissao_id"))
