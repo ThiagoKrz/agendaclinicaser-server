@@ -2,6 +2,9 @@ package com.nexcodelab.agendaclinicaser.application.user.supervisor.controller.c
 
 import com.nexcodelab.agendaclinicaser.application.user.supervisor.dto.request.CadastrarSupervisorRequest;
 import com.nexcodelab.agendaclinicaser.application.user.supervisor.service.CadastrarSupervisorUseCase;
+import com.nexcodelab.agendaclinicaser.application.user.usuario.model.enums.Role;
+import com.nexcodelab.agendaclinicaser.core.security.annotation.RolesAllowed;
+import com.nexcodelab.agendaclinicaser.core.security.enums.AccessLevel;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,7 @@ public class CadastrarSupervisorController {
 
     private final CadastrarSupervisorUseCase service;
 
+    @RolesAllowed(accessLevel = AccessLevel.ADMIN)
     @PostMapping("/supervisor")
     public ResponseEntity<Void> execute(@Valid @RequestBody CadastrarSupervisorRequest request) {
         return new ResponseEntity(service.execute(request), HttpStatus.CREATED);

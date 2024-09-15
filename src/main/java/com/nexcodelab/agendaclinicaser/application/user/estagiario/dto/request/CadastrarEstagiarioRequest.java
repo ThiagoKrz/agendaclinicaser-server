@@ -16,8 +16,5 @@ public class CadastrarEstagiarioRequest extends CadastrarPersonaRequest {
     @NotEmpty @Size(max = 90)
     String password;
 
-    @NotNull
-    Role role;
-
     Integer horasRequeridas;
 }
