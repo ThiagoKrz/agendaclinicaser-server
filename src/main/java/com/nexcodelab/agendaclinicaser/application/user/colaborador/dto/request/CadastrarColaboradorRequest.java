@@ -1,6 +1,7 @@
 package com.nexcodelab.agendaclinicaser.application.user.colaborador.dto.request;
 
 import com.nexcodelab.agendaclinicaser.application.user.persona.dto.request.CadastrarPersonaRequest;
+import com.nexcodelab.agendaclinicaser.application.user.usuario.model.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -16,5 +17,5 @@ public class CadastrarColaboradorRequest extends CadastrarPersonaRequest {
     String password;
 
     @NotNull
-    Long perfilAcessoId;
+    Role role;
 }

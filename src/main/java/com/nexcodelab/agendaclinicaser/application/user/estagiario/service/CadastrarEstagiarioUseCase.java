@@ -14,7 +14,7 @@ public class CadastrarEstagiarioUseCase extends CadastrarPersonaUseCase<Estagiar
     private final CadastrarUsuarioUseCase cadastrarUsuarioUseCase;
 
     public Estagiario execute(CadastrarEstagiarioRequest request) {
-        Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), request.getPerfilAcessoId());
+        Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), request.getRole());
 
         return super.execute(toEstagiario(request, usuario));
     }

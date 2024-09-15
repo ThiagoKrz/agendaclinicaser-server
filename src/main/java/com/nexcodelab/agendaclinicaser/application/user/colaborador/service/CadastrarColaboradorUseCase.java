@@ -14,7 +14,7 @@ public class CadastrarColaboradorUseCase extends CadastrarPersonaUseCase<Colabor
     private final CadastrarUsuarioUseCase cadastrarUsuarioUseCase;
 
     public Colaborador execute(CadastrarColaboradorRequest request) {
-        Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), request.getPerfilAcessoId());
+        Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), request.getRole());
 
         return super.execute(toColaborador(request, usuario));
     }
