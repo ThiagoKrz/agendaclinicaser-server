@@ -15,7 +15,4 @@ public class CadastrarSupervisorRequest extends CadastrarPersonaRequest {
 
     @NotEmpty @Size(max = 90)
     String password;
-
-    @NotNull
-    Role role;
 }
