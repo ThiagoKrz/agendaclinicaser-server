@@ -1,6 +1,6 @@
-package com.nexcodelab.agendaclinicaser.application.user.paciente.controller.query;
+package com.nexcodelab.agendaclinicaser.application.user.colaborador.controller.query;
 
-import com.nexcodelab.agendaclinicaser.application.user.paciente.service.ListarPacienteUseCase;
+import com.nexcodelab.agendaclinicaser.application.user.colaborador.service.ListarColaboradorUseCase;
 import com.nexcodelab.agendaclinicaser.application.user.persona.vo.IPersonaResumidaVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class ListarPacienteController {
+public class ListarColaboradorController {
 
-    private final ListarPacienteUseCase service;
+    private final ListarColaboradorUseCase service;
 
-    @GetMapping("/paciente")
+    @GetMapping("/colaborador")
     public ResponseEntity<List<IPersonaResumidaVO>> execute() {
          return ResponseEntity.ok(service.execute());
     }

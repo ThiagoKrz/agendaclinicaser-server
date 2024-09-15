@@ -1,5 +1,6 @@
-package com.nexcodelab.agendaclinicaser.application.user.paciente.service;
+package com.nexcodelab.agendaclinicaser.application.user.colaborador.service;
 
+import com.nexcodelab.agendaclinicaser.application.user.colaborador.model.Colaborador;
 import com.nexcodelab.agendaclinicaser.application.user.paciente.model.Paciente;
 import com.nexcodelab.agendaclinicaser.application.user.persona.repository.PersonaRepository;
 import com.nexcodelab.agendaclinicaser.application.user.persona.vo.IPersonaResumidaVO;
@@ -12,8 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ListarPacienteUseCase {
-    private final PersonaRepository<Paciente> personaRepository;
+public class ListarColaboradorUseCase {
+    private final PersonaRepository<Colaborador> personaRepository;
 
     public List<IPersonaResumidaVO> execute() {
         return personaRepository.findAllPersonaResumida().stream()
