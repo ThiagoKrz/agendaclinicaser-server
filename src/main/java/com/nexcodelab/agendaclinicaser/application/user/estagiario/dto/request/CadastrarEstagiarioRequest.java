@@ -17,4 +17,7 @@ public class CadastrarEstagiarioRequest extends CadastrarPersonaRequest {
     String password;
 
     Integer horasRequeridas;
+
+    @NotEmpty
+    String idSupervisor;
 }

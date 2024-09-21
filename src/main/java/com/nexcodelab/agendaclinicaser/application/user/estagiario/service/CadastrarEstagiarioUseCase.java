@@ -3,24 +3,31 @@ package com.nexcodelab.agendaclinicaser.application.user.estagiario.service;
 import com.nexcodelab.agendaclinicaser.application.user.estagiario.dto.request.CadastrarEstagiarioRequest;
 import com.nexcodelab.agendaclinicaser.application.user.estagiario.model.Estagiario;
 import com.nexcodelab.agendaclinicaser.application.user.persona.service.CadastrarPersonaUseCase;
+import com.nexcodelab.agendaclinicaser.application.user.supervisor.model.Supervisor;
+import com.nexcodelab.agendaclinicaser.application.user.supervisor.repository.SupervisorRepository;
 import com.nexcodelab.agendaclinicaser.application.user.usuario.model.Usuario;
 import com.nexcodelab.agendaclinicaser.application.user.usuario.model.enums.Role;
 import com.nexcodelab.agendaclinicaser.application.user.usuario.service.CadastrarUsuarioUseCase;
+import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.BusinessRuleException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class CadastrarEstagiarioUseCase extends CadastrarPersonaUseCase<Estagiario> {
+
     private final CadastrarUsuarioUseCase cadastrarUsuarioUseCase;
+    private final SupervisorRepository supervisorRepository;
 
     public Estagiario execute(CadastrarEstagiarioRequest request) {
         Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), Role.ESTAGIARIO);
+        Supervisor supervisor = supervisorRepository.findById(request.getIdSupervisor())
+                .orElseThrow(() -> new BusinessRuleException("Supervisor não encontrado"));
 
-        return super.execute(toEstagiario(request, usuario));
+        return super.execute(toEstagiario(request, usuario, supervisor));
     }
 
-    private Estagiario toEstagiario(CadastrarEstagiarioRequest request, Usuario usuario) {
+    private Estagiario toEstagiario(CadastrarEstagiarioRequest request, Usuario usuario, Supervisor supervisor) {
         return new Estagiario(
                 usuario,
                 request.getHorasRequeridas(),
@@ -30,7 +37,9 @@ public class CadastrarEstagiarioUseCase extends CadastrarPersonaUseCase<Estagiar
                 request.getSexo(),
                 request.getEmail(),
                 request.getDdd(),
-                request.getNumeroTelefone()
+                request.getNumeroTelefone(),
+                supervisor
+
         );
     }
 
