@@ -19,7 +19,7 @@ import java.util.UUID;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "UPDATE persona SET inativo = true WHERE id=?")
+//@SQLDelete(sql = "UPDATE persona SET inativo = true WHERE id=?")
 @Getter
 @NoArgsConstructor @RequiredArgsConstructor
 public abstract class Persona{
@@ -74,5 +74,9 @@ public abstract class Persona{
 
     public String getSigla(){
         return nome.substring(0, 1).toUpperCase() + sobrenome.substring(0, 1).toUpperCase();
+    }
+
+    public void ativarInativar(){
+        this.inativo = !this.inativo;
     }
 }

@@ -1,29 +1,30 @@
 package com.nexcodelab.agendaclinicaser.application.user.estagiario.controller.command;
 
-import com.nexcodelab.agendaclinicaser.application.user.estagiario.dto.request.CadastrarEstagiarioRequest;
+import com.nexcodelab.agendaclinicaser.application.user.colaborador.model.Colaborador;
 import com.nexcodelab.agendaclinicaser.application.user.estagiario.model.Estagiario;
-import com.nexcodelab.agendaclinicaser.application.user.estagiario.service.EstagiarioService;
+import com.nexcodelab.agendaclinicaser.application.user.persona.service.PersonaService;
 import com.nexcodelab.agendaclinicaser.core.security.annotation.RolesAllowed;
 import com.nexcodelab.agendaclinicaser.core.security.enums.AccessLevel;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
 @RequiredArgsConstructor
-public class CadastrarEstagiarioController {
+public class AtivarInativarEstagiarioController {
 
-    private final EstagiarioService service;
+    private final PersonaService<Estagiario> service;
 
     @RolesAllowed(accessLevel = AccessLevel.ADMIN)
-    @PostMapping("/estagiario")
-    public ResponseEntity<Estagiario> execute(@Valid @RequestBody CadastrarEstagiarioRequest request) {
-        return new ResponseEntity(service.execute(request), HttpStatus.CREATED);
+    @PatchMapping("/estagiario/{id}")
+    public ResponseEntity<Colaborador> execute(@PathVariable String  id) {
+        service.ativarInativar(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
 }

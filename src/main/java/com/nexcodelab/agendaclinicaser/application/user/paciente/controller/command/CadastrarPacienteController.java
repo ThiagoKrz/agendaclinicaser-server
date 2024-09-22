@@ -2,9 +2,7 @@ package com.nexcodelab.agendaclinicaser.application.user.paciente.controller.com
 
 import com.nexcodelab.agendaclinicaser.application.user.paciente.dto.request.CadastrarPacienteRequest;
 import com.nexcodelab.agendaclinicaser.application.user.paciente.model.Paciente;
-import com.nexcodelab.agendaclinicaser.application.user.paciente.service.CadastrarPacienteUseCase;
-import com.nexcodelab.agendaclinicaser.application.user.persona.service.CadastrarPersonaUseCase;
-import com.nexcodelab.agendaclinicaser.application.user.usuario.model.enums.Role;
+import com.nexcodelab.agendaclinicaser.application.user.paciente.service.PacienteService;
 import com.nexcodelab.agendaclinicaser.core.security.annotation.RolesAllowed;
 import com.nexcodelab.agendaclinicaser.core.security.enums.AccessLevel;
 import jakarta.validation.Valid;
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CadastrarPacienteController {
 
-    private final CadastrarPacienteUseCase service;
+    private final PacienteService service;
 
     @RolesAllowed(accessLevel = AccessLevel.ADMIN)
     @PostMapping("/paciente")

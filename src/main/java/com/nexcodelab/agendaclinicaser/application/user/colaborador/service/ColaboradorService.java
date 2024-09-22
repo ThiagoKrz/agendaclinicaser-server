@@ -2,7 +2,7 @@ package com.nexcodelab.agendaclinicaser.application.user.colaborador.service;
 
 import com.nexcodelab.agendaclinicaser.application.user.colaborador.dto.request.CadastrarColaboradorRequest;
 import com.nexcodelab.agendaclinicaser.application.user.colaborador.model.Colaborador;
-import com.nexcodelab.agendaclinicaser.application.user.persona.service.CadastrarPersonaUseCase;
+import com.nexcodelab.agendaclinicaser.application.user.persona.service.PersonaService;
 import com.nexcodelab.agendaclinicaser.application.user.usuario.model.Usuario;
 import com.nexcodelab.agendaclinicaser.application.user.usuario.model.enums.Role;
 import com.nexcodelab.agendaclinicaser.application.user.usuario.service.CadastrarUsuarioUseCase;
@@ -14,14 +14,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CadastrarColaboradorUseCase extends CadastrarPersonaUseCase<Colaborador> {
+public class ColaboradorService extends PersonaService<Colaborador> {
     private final CadastrarUsuarioUseCase cadastrarUsuarioUseCase;
 
     public Colaborador execute(CadastrarColaboradorRequest request) {
         validarRole(request.getRole());
         Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), request.getRole());
 
-        return super.execute(toColaborador(request, usuario));
+        return super.cadastrar(toColaborador(request, usuario));
     }
 
     private void  validarRole(Role role){

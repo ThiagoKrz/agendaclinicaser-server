@@ -2,16 +2,16 @@ package com.nexcodelab.agendaclinicaser.application.user.paciente.service;
 
 import com.nexcodelab.agendaclinicaser.application.user.paciente.dto.request.CadastrarPacienteRequest;
 import com.nexcodelab.agendaclinicaser.application.user.paciente.model.Paciente;
-import com.nexcodelab.agendaclinicaser.application.user.persona.service.CadastrarPersonaUseCase;
+import com.nexcodelab.agendaclinicaser.application.user.persona.service.PersonaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CadastrarPacienteUseCase extends CadastrarPersonaUseCase<Paciente> {
+public class PacienteService extends PersonaService<Paciente> {
 
     public Paciente execute(CadastrarPacienteRequest request) {
-        return super.execute(toPaciente(request));
+        return super.cadastrar(toPaciente(request));
     }
 
     private Paciente toPaciente(CadastrarPacienteRequest request) {
