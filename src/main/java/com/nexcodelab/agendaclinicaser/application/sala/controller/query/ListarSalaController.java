@@ -1,4 +1,4 @@
-package com.nexcodelab.agendaclinicaser.application.sala.controller;
+package com.nexcodelab.agendaclinicaser.application.sala.controller.query;
 
 import com.nexcodelab.agendaclinicaser.application.sala.service.ListarSalaUseCase;
 import com.nexcodelab.agendaclinicaser.application.sala.vo.ISalaResumidaVO;

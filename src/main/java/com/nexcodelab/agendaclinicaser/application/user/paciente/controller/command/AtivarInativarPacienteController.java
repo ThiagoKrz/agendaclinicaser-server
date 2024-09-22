@@ -18,7 +18,7 @@ public class AtivarInativarPacienteController {
     private final PersonaService<Paciente> service;
 
     @RolesAllowed(accessLevel = AccessLevel.CLINICA)
-    @PatchMapping("/paciente/{id}")
+    @PatchMapping("/paciente/ativar-inativar/id}")
     public ResponseEntity<Colaborador> execute(@PathVariable String  id) {
         service.ativarInativar(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);

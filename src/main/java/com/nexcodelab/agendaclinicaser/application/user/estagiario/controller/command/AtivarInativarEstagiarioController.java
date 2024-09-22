@@ -21,7 +21,7 @@ public class AtivarInativarEstagiarioController {
     private final PersonaService<Estagiario> service;
 
     @RolesAllowed(accessLevel = AccessLevel.ADMIN)
-    @PatchMapping("/estagiario/{id}")
+    @PatchMapping("/estagiario/ativar-inativar/{id}")
     public ResponseEntity<Colaborador> execute(@PathVariable String  id) {
         service.ativarInativar(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
