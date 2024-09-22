@@ -6,6 +6,8 @@ import java.util.List;
 
 @Value
 public class LoggedUserResponse {
-    Long id;
+    String id;
+    String nomeCompleto;
+    String sigla;
     List<String> roles;
 }

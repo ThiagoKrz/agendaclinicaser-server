@@ -4,8 +4,10 @@ import com.nexcodelab.agendaclinicaser.application.user.persona.model.Persona;
 import com.nexcodelab.agendaclinicaser.application.user.persona.vo.IPersonaResumidaVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonaRepository<T extends Persona> extends JpaRepository<T, String>  {
 
@@ -16,4 +18,9 @@ public interface PersonaRepository<T extends Persona> extends JpaRepository<T, S
            "   NOT p.inativo AS isAtivo " +
            "FROM #{#entityName} p ")
     List<IPersonaResumidaVO> findAllPersonaResumida();
+
+    @Query("SELECT p FROM #{#entityName} p " +
+            "LEFT JOIN Usuario u ON p.usuario = u " +
+            "WHERE u.id = :id ")
+    Optional<T> findPersonaLogada(Long id);
 }

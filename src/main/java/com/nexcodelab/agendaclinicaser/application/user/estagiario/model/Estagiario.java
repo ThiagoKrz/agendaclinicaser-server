@@ -16,19 +16,19 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor @AllArgsConstructor
 public class Estagiario extends Persona {
+    private Integer periodo;
     private Integer horasRequeridas;
-
-    @OneToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Supervisor supervisor;
 
     public Estagiario(Usuario usuario, Integer horasRequeridas, String nome, String sobrenome, LocalDate dataNascimento, Sexo sexo, String email, String ddd, String numero, Supervisor supervisor) {
-        super(nome, sobrenome, dataNascimento, sexo, email, new Telefone(ddd, numero));
-        this.usuario =  usuario;
+        super(nome, sobrenome, dataNascimento, sexo, email, new Telefone(ddd, numero), usuario);
         this.horasRequeridas = horasRequeridas;
         this.supervisor =  supervisor;
+    }
+
+    public String getNomeCompletoSupervisor(){
+        return this.supervisor.getNome() + " "  + this.supervisor.getSobrenome();
     }
 }

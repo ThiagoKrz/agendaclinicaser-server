@@ -18,15 +18,10 @@ import java.util.List;
 @NoArgsConstructor @AllArgsConstructor
 public class Supervisor extends Persona {
 
-    @OneToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
     @OneToMany(mappedBy = "supervisor", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Estagiario> estagiarios;
 
     public Supervisor(Usuario usuario, String nome, String sobrenome, LocalDate dataNascimento, Sexo sexo, String email, String ddd, String numero) {
-        super(nome, sobrenome, dataNascimento, sexo, email, new Telefone(ddd, numero));
-        this.usuario =  usuario;
+        super(nome, sobrenome, dataNascimento, sexo, email, new Telefone(ddd, numero), usuario);
     }
 }
