@@ -16,4 +16,8 @@ public class Telefone {
 
     @Column(nullable = false, length = 11)
     private String numeroTelefone;
+
+    public String getNumeroTelefone() {
+        return ddd + numeroTelefone;
+    }
 }

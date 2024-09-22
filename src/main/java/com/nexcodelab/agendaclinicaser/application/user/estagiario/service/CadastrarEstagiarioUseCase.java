@@ -8,7 +8,7 @@ import com.nexcodelab.agendaclinicaser.application.user.supervisor.repository.Su
 import com.nexcodelab.agendaclinicaser.application.user.usuario.model.Usuario;
 import com.nexcodelab.agendaclinicaser.application.user.usuario.model.enums.Role;
 import com.nexcodelab.agendaclinicaser.application.user.usuario.service.CadastrarUsuarioUseCase;
-import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.BusinessRuleException;
+import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class CadastrarEstagiarioUseCase extends CadastrarPersonaUseCase<Estagiar
     public Estagiario execute(CadastrarEstagiarioRequest request) {
         Usuario usuario = cadastrarUsuarioUseCase.execute(request.getUsername(), request.getPassword(), Role.ESTAGIARIO);
         Supervisor supervisor = supervisorRepository.findById(request.getIdSupervisor())
-                .orElseThrow(() -> new BusinessRuleException("Supervisor não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Supervisor não encontrado"));
 
         return super.execute(toEstagiario(request, usuario, supervisor));
     }

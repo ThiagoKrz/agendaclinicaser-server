@@ -15,15 +15,10 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
 public class Colaborador extends Persona {
 
-    @OneToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
     public Colaborador(Usuario usuario, String nome, String sobrenome, LocalDate dataNascimento, Sexo sexo, String email, String ddd, String numero) {
-        super(nome, sobrenome, dataNascimento, sexo, email, new Telefone(ddd, numero));
-        this.usuario =  usuario;
+        super(nome, sobrenome, dataNascimento, sexo, email, new Telefone(ddd, numero), usuario);
     }
 }
