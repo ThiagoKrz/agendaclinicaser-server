@@ -21,11 +21,11 @@ public class StreamUtils {
 //    }
 
     public static <T> Predicate<T> isDateGreaterOrEqual(Function<? super T, LocalDate> getStart, Function<? super T, LocalDate> getEnd) {
-        return t -> DateUtils.isLocalDateGreaterOrEqual(getStart.apply(t), getEnd.apply(t));
+        return t -> Validations.isLocalDateGreaterOrEqual(getStart.apply(t), getEnd.apply(t));
     }
 
     public static <T> Predicate<T> isDateLessOrEqual(Function<? super T, LocalDate> getStart, Function<? super T, LocalDate> getEnd) {
-        return t -> DateUtils.isLocalDateLessOrEqual(getStart.apply(t), getEnd.apply(t));
+        return t -> Validations.isLocalDateLessOrEqual(getStart.apply(t), getEnd.apply(t));
     }
 
 //    public static <T> Predicate<T> isDateWithinRange(Function<? super T, LocalDate> getValue, Function<? super T, LocalDate> getStart, Function<? super T, LocalDate> getEnd) {

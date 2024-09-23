@@ -26,19 +26,4 @@ public class DateUtils {
 
         return LocalDateTime.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
-
-    public static Boolean isLocalDateGreaterOrEqual(LocalDate start,  LocalDate end){
-        return start.isEqual(end) || start.isAfter(end);
-    }
-
-    public static Boolean isLocalDateLessOrEqual(LocalDate start,  LocalDate end){
-        return start.isEqual(end) || start.isBefore(end);
-    }
-
-    public static Boolean isLocalDateWithinRange(LocalDate value, LocalDate start,  LocalDate end){
-        return (value.isEqual(start) || value.isAfter(start)) && (value.isEqual(end) || value.isBefore(end));
-    }
-    public static Boolean isLocalDateWithinRangeOrOpenEnd(LocalDate value, LocalDate start,  LocalDate end){
-        return (value.isEqual(start) || value.isAfter(start)) && (end == null || value.isEqual(end) || value.isBefore(end));
-    }
 }

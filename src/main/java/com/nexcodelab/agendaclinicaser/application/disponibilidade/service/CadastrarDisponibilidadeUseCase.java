@@ -9,12 +9,11 @@ import com.nexcodelab.agendaclinicaser.application.user.estagiario.repository.Es
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.BusinessRuleException;
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.InvalidDateRangeException;
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ResourceNotFoundException;
-import com.nexcodelab.agendaclinicaser.shared.utils.DateUtils;
 import com.nexcodelab.agendaclinicaser.shared.utils.DiaDaSemanaUtils;
 import com.nexcodelab.agendaclinicaser.shared.utils.StreamUtils;
+import com.nexcodelab.agendaclinicaser.shared.utils.Validations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -55,7 +54,7 @@ public class CadastrarDisponibilidadeUseCase {
     }
 
     private void validarDataInicioInvalida(CadastrarDisponibilidadeRequest request) {
-        Boolean isInvalido = DateUtils.isLocalDateGreaterOrEqual(request.getDataInicio(), request.getDataFim());
+        Boolean isInvalido = Validations.isLocalDateGreaterOrEqual(request.getDataInicio(), request.getDataFim());
 
         if (isInvalido) {
             throw new InvalidDateRangeException("A data inicial é maior ou igual que a data final");
