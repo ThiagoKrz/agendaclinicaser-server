@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,5 +74,24 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         return new ResponseEntity<>(exceptionDetails, headers, statusCode);
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<Object> handleException(JpaSystemException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        ExceptionDetails exceptionDetails = ExceptionDetails.builder().build();
+        try {
+            String title = ex.getCause() != null ? ex.getCause().getMessage() : "Unknown error";
+            exceptionDetails = ExceptionDetails.builder().timestamp(LocalDateTime.now())
+                    .status(status.value()).title(title)
+                    .details(ex.getMessage()).developerMessage(ex.getClass().getName()).build();
+
+        } catch (NullPointerException e) {
+            log.error("An error occurred while handling an exception internally", e);
+            exceptionDetails = ExceptionDetails.builder().timestamp(LocalDateTime.now())
+                    .status(status.value()).title("Internal Server Error")
+                    .details("An unexpected error occurred").developerMessage(e.getMessage()).build();
+        }
+
+        return new ResponseEntity<>(exceptionDetails, headers, status);
     }
 }

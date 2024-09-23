@@ -11,7 +11,10 @@ spring:
       dialect: org.hibernate.dialect.PostgreSQLDialect
 
   datasource:
-    url: jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:6543/postgres?user=postgres.mgptkrvuirdpqlbcotdi&password=gQvklPlpi02afeHo
+    url: jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:5432/postgres
+    username: postgres.mgptkrvuirdpqlbcotdi
+    password: gQvklPlpi02afeHo
+
 
 server:
   servlet:

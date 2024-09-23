@@ -23,4 +23,7 @@ public interface PersonaRepository<T extends Persona> extends JpaRepository<T, S
             "LEFT JOIN Usuario u ON p.usuario = u " +
             "WHERE u.id = :id ")
     Optional<T> findPersonaLogada(Long id);
+
+    @Query("SELECT COUNT(p.id) > 0 FROM #{#entityName} p WHERE p.id = :id")
+    boolean existsById(String id);
 }

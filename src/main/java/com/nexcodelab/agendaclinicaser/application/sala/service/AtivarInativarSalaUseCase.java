@@ -14,6 +14,10 @@ public class AtivarInativarSalaUseCase {
 
     private final SalaRepository repository;
 
+    /**
+     * Todo Adicionar validação para impossibilitar inativar se tiver atendimento marcado no dia ou posterior
+     *
+     */
     public void execute(Long id){
         Sala sala = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Sala não encontrada"));

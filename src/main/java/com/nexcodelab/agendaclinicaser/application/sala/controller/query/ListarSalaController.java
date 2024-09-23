@@ -20,7 +20,7 @@ public class ListarSalaController {
 
     @RolesAllowed(accessLevel = AccessLevel.CLINICA)
     @GetMapping("/sala")
-    private ResponseEntity<List<ISalaResumidaVO>> execute(){
+    public ResponseEntity<List<ISalaResumidaVO>> execute(){
         return ResponseEntity.ok(service.execute());
     }
 }
