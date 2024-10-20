@@ -2,16 +2,15 @@ package com.nexcodelab.agendaclinicaser.application.user.persona.model;
 
 import com.nexcodelab.agendaclinicaser.application.user.usuario.model.Usuario;
 import com.nexcodelab.agendaclinicaser.shared.enums.Sexo;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,7 +22,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor @RequiredArgsConstructor
 public abstract class Persona{
-    @Id @Getter
+    @Id
+    @Getter
     private final String id = UUID.randomUUID().toString();
 
     @Column(length = 90, nullable = false)

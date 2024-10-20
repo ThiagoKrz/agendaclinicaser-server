@@ -5,10 +5,8 @@ import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.CustomRe
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ExceptionDetails;
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ValidationExceptionDetails;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.validation.FieldError;
@@ -40,7 +38,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
 
         String fields = fieldErrors.stream().map(FieldError::getField)
@@ -58,7 +56,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus statusCode, WebRequest request) {
         ExceptionDetails exceptionDetails = ExceptionDetails.builder().build();
         try {
             String title = ex.getCause() != null ? ex.getCause().getMessage() : "Unknown error";
@@ -77,7 +75,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SQLException.class)
-    public ResponseEntity<Object> handleException(JpaSystemException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    public ResponseEntity<Object> handleException(JpaSystemException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ExceptionDetails exceptionDetails = ExceptionDetails.builder().build();
         try {
             String title = ex.getCause() != null ? ex.getCause().getMessage() : "Unknown error";

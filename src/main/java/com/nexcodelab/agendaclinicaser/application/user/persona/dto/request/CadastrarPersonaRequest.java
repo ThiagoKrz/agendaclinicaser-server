@@ -1,20 +1,20 @@
 package com.nexcodelab.agendaclinicaser.application.user.persona.dto.request;
 
 import com.nexcodelab.agendaclinicaser.shared.enums.Sexo;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.Value;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 
 @Getter
 public abstract class CadastrarPersonaRequest {
 
-    @NotEmpty @Size(max = 90)
+    @NotEmpty
+    @Size(max = 90)
     String nome;
 
     @NotEmpty @Size(max = 90)
@@ -26,7 +26,7 @@ public abstract class CadastrarPersonaRequest {
     @NotNull
     Sexo sexo;
 
-    @Email  @NotEmpty @Size(max = 90)
+    @Email @NotEmpty @Size(max = 90)
     String email;
 
     @NotEmpty @Size(max = 2)

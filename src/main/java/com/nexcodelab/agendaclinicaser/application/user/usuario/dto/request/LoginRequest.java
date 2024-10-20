@@ -1,7 +1,8 @@
 package com.nexcodelab.agendaclinicaser.application.user.usuario.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Value;
+
+import javax.validation.constraints.NotBlank;
 
 @Value
 public class LoginRequest {

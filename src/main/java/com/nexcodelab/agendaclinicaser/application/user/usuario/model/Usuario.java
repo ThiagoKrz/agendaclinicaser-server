@@ -2,10 +2,14 @@ package com.nexcodelab.agendaclinicaser.application.user.usuario.model;
 
 import com.nexcodelab.agendaclinicaser.application.user.usuario.model.enums.Role;
 import com.nexcodelab.agendaclinicaser.shared.model.EntityBase;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 @Getter

@@ -1,11 +1,11 @@
 package com.nexcodelab.agendaclinicaser.application.disponibilidade.model;
 
 import com.nexcodelab.agendaclinicaser.shared.model.EntityBase;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.DayOfWeek;
 import java.util.Set;
 
