@@ -14,12 +14,6 @@ public class CadastrarDisponibilidadeRequest {
     @NotBlank
     String idEstagiario;
 
-    @NotNull
-    LocalDate dataInicio;
-
-    @NotNull
-    LocalDate dataFim;
-
     @NotEmpty
     Set<CadastrarDisponibilidadeDiaSemanaRequest> diasDaSemana;
 }

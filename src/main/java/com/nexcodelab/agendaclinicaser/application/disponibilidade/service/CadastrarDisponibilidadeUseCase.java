@@ -11,7 +11,6 @@ import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.InvalidD
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ResourceNotFoundException;
 import com.nexcodelab.agendaclinicaser.shared.utils.DiaDaSemanaUtils;
 import com.nexcodelab.agendaclinicaser.shared.utils.StreamUtils;
-import com.nexcodelab.agendaclinicaser.shared.utils.Validations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,22 +42,13 @@ public class CadastrarDisponibilidadeUseCase {
                     return new DisponibilidadeDiaSemana(DiaDaSemanaUtils.toDayOfWeek(dia.getDiaDaSemana()), horarios);
                 }).collect(Collectors.toSet());
 
-        return new DisponibilidadePersona( request.getDataInicio(), request.getDataFim(), request.getIdEstagiario(), disponibilidadeDiaSemanas);
+        return new DisponibilidadePersona(request.getIdEstagiario(), disponibilidadeDiaSemanas);
     }
 
     private void validar(CadastrarDisponibilidadeRequest request) {
-        validarDataInicioInvalida(request);
         validarHoraInicioInvalida(request);
         validarEstagiario(request);
-        validarConflitoHorarios(request);
-    }
-
-    private void validarDataInicioInvalida(CadastrarDisponibilidadeRequest request) {
-        Boolean isInvalido = Validations.isLocalDateGreaterOrEqual(request.getDataInicio(), request.getDataFim());
-
-        if (isInvalido) {
-            throw new InvalidDateRangeException("A data inicial é maior ou igual que a data final");
-        }
+        validarSeJaExisteDisponibilidade(request);
     }
 
     private void validarHoraInicioInvalida(CadastrarDisponibilidadeRequest request) {
@@ -71,8 +61,8 @@ public class CadastrarDisponibilidadeUseCase {
         }
     }
 
-    private void validarConflitoHorarios(CadastrarDisponibilidadeRequest request) {
-        if (disponibilidadeRepository.existsDisponibilidadeConflitante(request.getDataInicio(), request.getDataFim(), request.getIdEstagiario())) {
+    private void validarSeJaExisteDisponibilidade(CadastrarDisponibilidadeRequest request) {
+        if (disponibilidadeRepository.existsDisponibilidadeEstagiario(request.getIdEstagiario())) {
             throw new BusinessRuleException("Existe conflito com uma disponibilidade existente");
         }
     }

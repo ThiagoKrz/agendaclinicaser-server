@@ -5,12 +5,14 @@ import com.nexcodelab.agendaclinicaser.application.disponibilidade.dto.response.
 import com.nexcodelab.agendaclinicaser.application.disponibilidade.dto.response.DisponibilidadeResponse;
 import com.nexcodelab.agendaclinicaser.application.disponibilidade.model.DisponibilidadePersona;
 import com.nexcodelab.agendaclinicaser.application.disponibilidade.repository.DisponibilidadeRepository;
+import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,13 +23,11 @@ public class ListarDisponibilidadeUseCase {
 
     private final DisponibilidadeRepository disponibilidadeRepository;
 
-    public List<DisponibilidadeResponse> execute(String id) {
-        List<DisponibilidadePersona> disponibilidades = disponibilidadeRepository.findByPersonaId(id)
-                .stream()
-                .sorted(Comparator.comparing(DisponibilidadePersona::getDataInicio).reversed())
-                .collect(Collectors.toList());
+    public DisponibilidadeResponse execute(String id) {
+        DisponibilidadePersona disponibilidade = disponibilidadeRepository.findByPersonaId(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Disponibilidade não encontrada"));
 
-        return disponibilidades.stream().map(d -> toDisponibilidadePersona(d)).collect(Collectors.toList());
+        return toDisponibilidadePersona(disponibilidade);
     }
 
     private DisponibilidadeResponse toDisponibilidadePersona(DisponibilidadePersona disponibilidade) {
@@ -44,7 +44,7 @@ public class ListarDisponibilidadeUseCase {
 
                 }).collect(Collectors.toSet());
 
-        return new DisponibilidadeResponse(disponibilidade.getId(), disponibilidade.getDataInicio(), disponibilidade.getDataFim(), diasDaSemana);
+        return new DisponibilidadeResponse(disponibilidade.getId(), diasDaSemana);
     }
 
 

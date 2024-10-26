@@ -20,7 +20,7 @@ public class AtivarInativarSalaController {
 
     @RolesAllowed(accessLevel = AccessLevel.CLINICA)
     @PatchMapping("/sala/ativar-inativar/{id}")
-    public ResponseEntity<List<ISalaResumidaVO>> execute(@PathVariable Long id){
+    public ResponseEntity<List<ISalaResumidaVO>> execute(@PathVariable String id){
         service.execute(id);
 
         return ResponseEntity.noContent().build();

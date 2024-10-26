@@ -36,4 +36,8 @@ public class DisponibilidadeHoraria extends EntityBase {
         this.horaFim = horaFim;
         this.sala = sala;
     }
+
+    public void atualizarSala(Sala sala) {
+        this.sala = sala;
+    }
 }

@@ -8,7 +8,5 @@ import java.util.Set;
 @Value
 public class DisponibilidadeResponse {
     Long id;
-    LocalDate dataInicio;
-    LocalDate dataFim;
     Set<DisponibilidadeDiaSemanaResponse> diasDaSemana;
 }
