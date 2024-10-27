@@ -4,6 +4,8 @@ import com.nexcodelab.agendaclinicaser.application.disponibilidade.dto.response.
 import com.nexcodelab.agendaclinicaser.application.disponibilidade.service.ListarDisponibilidadeUseCase;
 import com.nexcodelab.agendaclinicaser.core.security.annotation.RolesAllowed;
 import com.nexcodelab.agendaclinicaser.core.security.enums.AccessLevel;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "Disponibilidade")
 @RestController
 @RequiredArgsConstructor
 public class ListarDisponibilidadeController {
 
     private final ListarDisponibilidadeUseCase service;
+
+    @Operation(summary = "Listar disponibilidade")
     @RolesAllowed(accessLevel = AccessLevel.CLINICA)
     @GetMapping("/disponibilidade/estagiario/{id}")
     public ResponseEntity<List<DisponibilidadeResponse>> execute(@PathVariable String id){

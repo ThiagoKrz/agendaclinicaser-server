@@ -6,11 +6,15 @@ import com.nexcodelab.agendaclinicaser.application.user.colaborador.service.Cola
 import com.nexcodelab.agendaclinicaser.application.user.persona.service.PersonaService;
 import com.nexcodelab.agendaclinicaser.core.security.annotation.RolesAllowed;
 import com.nexcodelab.agendaclinicaser.core.security.enums.AccessLevel;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+@Tag(name = "Colaborador")
 
 @RestController
 @RequestMapping
@@ -19,6 +23,7 @@ public class AtivarInativarColaboradorController {
 
     private final PersonaService<Colaborador> service;
 
+    @Operation(summary = "Ativar e inativar colaborador")
     @RolesAllowed(accessLevel = AccessLevel.ADMIN)
     @PatchMapping("/colaborador/ativar-inativar/{id}")
     public ResponseEntity<Colaborador> execute(@PathVariable String  id) {
