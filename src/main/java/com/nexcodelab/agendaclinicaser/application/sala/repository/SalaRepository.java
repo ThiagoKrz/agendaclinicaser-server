@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface SalaRepository extends JpaRepository<Sala, Long> {
+public interface SalaRepository extends JpaRepository<Sala, String> {
 
     @Query("SELECT  s.id AS id, s.nome AS nome FROM Sala s")
     List<ISalaResumidaVO> findAllSalaResumida();

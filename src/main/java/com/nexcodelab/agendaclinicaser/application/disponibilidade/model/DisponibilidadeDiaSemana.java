@@ -26,4 +26,5 @@ public class DisponibilidadeDiaSemana extends EntityBase {
         this.diaDaSemana = diaDaSemana;
         this.horarios = horarios;
     }
+
 }

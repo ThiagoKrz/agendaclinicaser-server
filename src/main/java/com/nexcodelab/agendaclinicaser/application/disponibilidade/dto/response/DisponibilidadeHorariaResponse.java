@@ -6,6 +6,5 @@ import java.time.LocalTime;
 
 @Value
 public class DisponibilidadeHorariaResponse {
-    LocalTime horaInicio;
-    LocalTime horaFim;
+    LocalTime horario;
 }

@@ -7,11 +7,8 @@ import com.nexcodelab.agendaclinicaser.application.disponibilidade.model.Disponi
 import com.nexcodelab.agendaclinicaser.application.disponibilidade.repository.DisponibilidadeRepository;
 import com.nexcodelab.agendaclinicaser.application.user.estagiario.repository.EstagiarioRepository;
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.BusinessRuleException;
-import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.InvalidDateRangeException;
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ResourceNotFoundException;
 import com.nexcodelab.agendaclinicaser.shared.utils.DiaDaSemanaUtils;
-import com.nexcodelab.agendaclinicaser.shared.utils.StreamUtils;
-import com.nexcodelab.agendaclinicaser.shared.utils.Validations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,42 +34,22 @@ public class CadastrarDisponibilidadeUseCase {
         Set<DisponibilidadeDiaSemana> disponibilidadeDiaSemanas = request.getDiasDaSemana().stream()
                 .map(dia -> {
                     Set<DisponibilidadeHoraria> horarios = dia.getHorarios().stream()
-                            .map(horario -> new DisponibilidadeHoraria(horario.getHoraInicio(), horario.getHoraFim()))
+                            .map(horario -> new DisponibilidadeHoraria(horario.getHorario()))
                             .collect(Collectors.toSet());
 
                     return new DisponibilidadeDiaSemana(DiaDaSemanaUtils.toDayOfWeek(dia.getDiaDaSemana()), horarios);
                 }).collect(Collectors.toSet());
 
-        return new DisponibilidadePersona( request.getDataInicio(), request.getDataFim(), request.getIdEstagiario(), disponibilidadeDiaSemanas);
+        return new DisponibilidadePersona(request.getIdEstagiario(), disponibilidadeDiaSemanas);
     }
 
     private void validar(CadastrarDisponibilidadeRequest request) {
-        validarDataInicioInvalida(request);
-        validarHoraInicioInvalida(request);
         validarEstagiario(request);
-        validarConflitoHorarios(request);
+        validarSeJaExisteDisponibilidade(request);
     }
 
-    private void validarDataInicioInvalida(CadastrarDisponibilidadeRequest request) {
-        Boolean isInvalido = Validations.isLocalDateGreaterOrEqual(request.getDataInicio(), request.getDataFim());
-
-        if (isInvalido) {
-            throw new InvalidDateRangeException("A data inicial é maior ou igual que a data final");
-        }
-    }
-
-    private void validarHoraInicioInvalida(CadastrarDisponibilidadeRequest request) {
-        Boolean isInvalido = request.getDiasDaSemana().stream()
-                .flatMap(diaSemana -> diaSemana.getHorarios().stream())
-                .anyMatch(StreamUtils.isLocalTimeGreaterOrEqual(dia -> dia.getHoraInicio(), dia -> dia.getHoraFim()));
-
-        if (isInvalido) {
-            throw new InvalidDateRangeException("A hora inicial é maior ou igual que a hora final");
-        }
-    }
-
-    private void validarConflitoHorarios(CadastrarDisponibilidadeRequest request) {
-        if (disponibilidadeRepository.existsDisponibilidadeConflitante(request.getDataInicio(), request.getDataFim(), request.getIdEstagiario())) {
+    private void validarSeJaExisteDisponibilidade(CadastrarDisponibilidadeRequest request) {
+        if (disponibilidadeRepository.existsDisponibilidadeEstagiario(request.getIdEstagiario())) {
             throw new BusinessRuleException("Existe conflito com uma disponibilidade existente");
         }
     }
