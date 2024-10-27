@@ -1,5 +1,6 @@
 package com.nexcodelab.agendaclinicaser.application.gestaoocupacaosalas.controller.query;
 
+import com.nexcodelab.agendaclinicaser.application.gestaoocupacaosalas.dto.response.PainelDeSalasResponse;
 import com.nexcodelab.agendaclinicaser.application.gestaoocupacaosalas.service.PainelDeSalasUseCase;
 import com.nexcodelab.agendaclinicaser.core.security.annotation.RolesAllowed;
 import com.nexcodelab.agendaclinicaser.core.security.enums.AccessLevel;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,11 +23,11 @@ public class PainelDeSalasController {
 
     @RolesAllowed(accessLevel = AccessLevel.CLINICA)
     @GetMapping("/painel-salas/{dataReferencia}")
-    public ResponseEntity<Void> execute(@PathVariable String dataReferencia){
+    public ResponseEntity<List<PainelDeSalasResponse>> execute(@PathVariable String dataReferencia){
         LocalDate dataReferenciaFormatada = DateUtils.toLocalDate(dataReferencia);
 
-        service.execute(dataReferenciaFormatada);
+        List<PainelDeSalasResponse> response = service.execute(dataReferenciaFormatada);
 
-        return new ResponseEntity(null, HttpStatus.OK);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 }

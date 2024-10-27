@@ -2,9 +2,9 @@ package com.nexcodelab.agendaclinicaser.application.gestaoocupacaosalas.dto.resp
 
 import java.util.List;
 
-public class SalaAgendaDiariaResponse {
-    private Long idSala;
-    private String nomeSala;
-
-    List<HorarioAgendaDiariaResponse> horarios;
-}
+//public class SalaAgendaDiariaResponse {
+//    private Long idSala;
+//    private String nomeSala;
+//
+//    List<HorarioAgendaDiariaResponse> horarios;
+//}

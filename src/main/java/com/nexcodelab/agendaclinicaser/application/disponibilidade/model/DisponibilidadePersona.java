@@ -5,12 +5,10 @@ import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.Resource
 import com.nexcodelab.agendaclinicaser.shared.model.EntityBase;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -35,7 +33,7 @@ public class DisponibilidadePersona extends EntityBase {
         DisponibilidadeDiaSemana dia = getDiaDaSemana().stream().filter(d -> d.getDiaDaSemana().equals(diaDaSemana)).findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Disponibilidade não encontrada"));
 
-        DisponibilidadeHoraria disponibilidadeHoraria = dia.getHorarios().stream().filter(h -> h.getHoraInicio().equals(horario)).findFirst()
+        DisponibilidadeHoraria disponibilidadeHoraria = dia.getHorarios().stream().filter(h -> h.getHorario().equals(horario)).findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Disponibilidade não encontrada"));
 
         disponibilidadeHoraria.atualizarSala(sala);

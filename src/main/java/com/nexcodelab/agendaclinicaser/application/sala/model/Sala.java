@@ -34,6 +34,10 @@ public class Sala {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    public Sala(String nome) {
+        this.nome = nome;
+    }
+
     public void ativarInativar(){
         this.inativo = !inativo;
     }

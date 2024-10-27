@@ -10,9 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,7 +31,7 @@ public class ListarDisponibilidadeUseCase {
         Set<DisponibilidadeDiaSemanaResponse> diasDaSemana = disponibilidade.getDiaDaSemana().stream()
                 .map(dia  -> {
                     Set<DisponibilidadeHorariaResponse> horarios = dia.getHorarios().stream()
-                            .map(horario -> new DisponibilidadeHorariaResponse(horario.getHoraInicio(), horario.getHoraFim()))
+                            .map(horario -> new DisponibilidadeHorariaResponse(horario.getHorario()))
                             .collect(Collectors.toSet());
 
                     return new DisponibilidadeDiaSemanaResponse(

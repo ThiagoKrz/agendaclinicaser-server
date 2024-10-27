@@ -1,14 +1,15 @@
 package com.nexcodelab.agendaclinicaser.application.disponibilidade.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.*;
 
-import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Value
+@RequiredArgsConstructor(onConstructor = @__(@JsonCreator))
 public class CadastrarDisponibilidadeRequest {
 
     @NotBlank

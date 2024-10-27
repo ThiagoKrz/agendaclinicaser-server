@@ -10,6 +10,7 @@ import com.nexcodelab.agendaclinicaser.application.sala.repository.SalaRepositor
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class VincularOcupacaoPainelDeSalaUseCase {
@@ -39,7 +41,6 @@ public class VincularOcupacaoPainelDeSalaUseCase {
                 request.stream().map(VincularOcupacaoPainelDeSalaRequest::getSalaId).distinct().toList()
         );
 
-        // Converte a lista de salas em um Map para acessos rápidos
         Map<String, Sala> salaMap = salas.stream().collect(Collectors.toMap(Sala::getId, s -> s));
 
         // Processa cada estagiário e vincula suas ocupações
@@ -70,7 +71,7 @@ public class VincularOcupacaoPainelDeSalaUseCase {
 
             // Converte os horários em um Map para acesso rápido
             Map<LocalTime, DisponibilidadeHoraria> horarioMap = dia.getHorarios().stream()
-                    .collect(Collectors.toMap(DisponibilidadeHoraria::getHoraInicio, h -> h));
+                    .collect(Collectors.toMap(DisponibilidadeHoraria::getHorario, h -> h));
 
             DisponibilidadeHoraria disponibilidadeHoraria = horarioMap.get(ocupacao.getHorario());
             if (disponibilidadeHoraria == null) {

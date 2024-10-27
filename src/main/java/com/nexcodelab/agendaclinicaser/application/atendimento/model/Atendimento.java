@@ -15,9 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Atendimento extends EntityBase {
     @NotNull
-    private LocalDateTime dataHoraInicio;
-
-    @NotNull private LocalDateTime dataHoraFim;
+    private LocalDateTime dataHora;
 
     @Getter @OneToOne(cascade = CascadeType.ALL) private PacienteEmServico pacienteEmServico;
 

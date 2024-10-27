@@ -7,10 +7,8 @@ import com.nexcodelab.agendaclinicaser.application.disponibilidade.model.Disponi
 import com.nexcodelab.agendaclinicaser.application.disponibilidade.repository.DisponibilidadeRepository;
 import com.nexcodelab.agendaclinicaser.application.user.estagiario.repository.EstagiarioRepository;
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.BusinessRuleException;
-import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.InvalidDateRangeException;
 import com.nexcodelab.agendaclinicaser.core.exceptionhandler.exceptions.ResourceNotFoundException;
 import com.nexcodelab.agendaclinicaser.shared.utils.DiaDaSemanaUtils;
-import com.nexcodelab.agendaclinicaser.shared.utils.StreamUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +34,7 @@ public class CadastrarDisponibilidadeUseCase {
         Set<DisponibilidadeDiaSemana> disponibilidadeDiaSemanas = request.getDiasDaSemana().stream()
                 .map(dia -> {
                     Set<DisponibilidadeHoraria> horarios = dia.getHorarios().stream()
-                            .map(horario -> new DisponibilidadeHoraria(horario.getHoraInicio(), horario.getHoraFim()))
+                            .map(horario -> new DisponibilidadeHoraria(horario.getHorario()))
                             .collect(Collectors.toSet());
 
                     return new DisponibilidadeDiaSemana(DiaDaSemanaUtils.toDayOfWeek(dia.getDiaDaSemana()), horarios);
@@ -46,19 +44,8 @@ public class CadastrarDisponibilidadeUseCase {
     }
 
     private void validar(CadastrarDisponibilidadeRequest request) {
-        validarHoraInicioInvalida(request);
         validarEstagiario(request);
         validarSeJaExisteDisponibilidade(request);
-    }
-
-    private void validarHoraInicioInvalida(CadastrarDisponibilidadeRequest request) {
-        Boolean isInvalido = request.getDiasDaSemana().stream()
-                .flatMap(diaSemana -> diaSemana.getHorarios().stream())
-                .anyMatch(StreamUtils.isLocalTimeGreaterOrEqual(dia -> dia.getHoraInicio(), dia -> dia.getHoraFim()));
-
-        if (isInvalido) {
-            throw new InvalidDateRangeException("A hora inicial é maior ou igual que a hora final");
-        }
     }
 
     private void validarSeJaExisteDisponibilidade(CadastrarDisponibilidadeRequest request) {
