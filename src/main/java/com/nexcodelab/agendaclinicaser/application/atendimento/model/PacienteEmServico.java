@@ -22,4 +22,15 @@ public class PacienteEmServico extends EntityBase {
 
     @Enumerated(EnumType.STRING) @Setter
     private ComparecimentoEnvolvido comparecimentoEnvolvido;
+
+    public PacienteEmServico(Paciente paciente) {
+        this.paciente = paciente;
+        this.comparecimentoEnvolvido = ComparecimentoEnvolvido.NAO_INFORMADO;
+    }
+
+    public void setComparecimentoEnvolvido(ComparecimentoEnvolvido comparecimentoEnvolvido) {
+        if(comparecimentoEnvolvido != null) {
+            this.comparecimentoEnvolvido = comparecimentoEnvolvido;
+        }
+    }
 }

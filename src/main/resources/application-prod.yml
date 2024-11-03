@@ -15,8 +15,14 @@ spring:
 
 
 server:
+  servlet:
+    context-path: /api
   port: 8080
   max-http-request-header-size: 1MB
+
+springdoc:
+  swagger-ui:
+    path: swagger-ui
 
 logging:
   file:

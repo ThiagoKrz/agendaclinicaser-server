@@ -22,4 +22,15 @@ public class EstagiarioEmServico extends EntityBase {
 
     @Enumerated(EnumType.STRING) @Setter
     private ComparecimentoEnvolvido comparecimentoEnvolvido;
+
+    public EstagiarioEmServico(Estagiario estagiario) {
+       this.estagiario = estagiario;
+       this.comparecimentoEnvolvido = ComparecimentoEnvolvido.NAO_INFORMADO;
+    }
+
+    public void setComparecimentoEnvolvido(ComparecimentoEnvolvido comparecimentoEnvolvido) {
+        if(comparecimentoEnvolvido != null) {
+            this.comparecimentoEnvolvido = comparecimentoEnvolvido;
+        }
+    }
 }

@@ -17,4 +17,8 @@ public class LocalDeTerapia extends EntityBase {
     private Sala sala;
 
     @OneToOne(mappedBy = "localDeTerapia") private Atendimento atendimento;
+
+    public LocalDeTerapia(Sala sala) {
+        this.sala = sala;
+    }
 }
