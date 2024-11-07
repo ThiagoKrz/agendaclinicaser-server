@@ -1,0 +1,23 @@
+<div class="search-bar">
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Pesquisar pacientes" (input)="filtrarPacientes()">
+  <button (click)="alternarStatus()">Ativar/Desativar Pacientes</button>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Endereço</th>
+      <th>Telefone</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let paciente of pacientes">
+      <td>{{ paciente.id }}</td>
+      <td>{{ paciente.nome }}</td>
+      <td>{{ paciente.endereco }}</td>
+      <td>{{ paciente.telefone }}</td>
+      <td>{{ paciente.status }}</td>
+    </tr>
+  </tbody>
+</table>
