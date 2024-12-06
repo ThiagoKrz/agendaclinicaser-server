@@ -1,0 +1,15 @@
+<div class="painel-de-salas">
+  <table mat-table [dataSource]="salas" class="mat-elevation-z8">
+    <tr *ngFor="let horario of horarios">
+      <td *ngFor="let sala of salas">
+        <div
+          class="sala-item"
+          [ngClass]="getClassForSala(sala, horario)"
+          (click)="abrirEdicaoSala(sala, horario)">
+          <p>{{ sala.nome }}</p>
+          <small>{{ getDetalhesAgendamento(sala, horario) }}</small>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

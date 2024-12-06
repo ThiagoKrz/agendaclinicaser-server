@@ -1,0 +1,24 @@
+<nav class="navbar navbar-light bg-light">
+
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="https://i.ibb.co/FzjJPC8/logo-poli.png" alt="Policlínica Logo" width="140
+      " height="24" class="d-inline-block align-text-top">
+    </a>
+    <div class="d-flex align-items-center">
+      <mat-toolbar color="primary">
+        <span>Policlínica</span>
+        <span class="spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="acessarPerfil()">Acessar Perfil</button>
+          <button mat-menu-item (click)="abrirCadastro()">Cadastrar Usuário</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </mat-toolbar>
+
+    </div>
+  </div>
+</nav>

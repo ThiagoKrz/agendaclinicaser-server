@@ -1,0 +1,63 @@
+.side-nav  {
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 15vw; /* 15% da largura da tela */
+    height: 100vh; /* 100% da altura da tela */
+    background-color: #333;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+.side-nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.side-nav ul li {
+  padding: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+.calendar-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.event {
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  /* Para telas pequenas, ajusta a sidebar */
+  .side-nav {
+      width: 30vw; /* Aumenta a largura da sidebar para 30% da tela */
+  }
+
+  .navbar {
+      height: 15vh; /* Aumenta a altura da navbar para 15% da altura da tela */
+  }
+
+  .content {
+      margin-left: 30vw; /* Deixa espaço para a nova largura da sidebar */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Para dispositivos móveis, ajusta a sidebar */
+  .side-nav {
+      width: 40vw; /* A sidebar ocupa 40% da tela */
+  }
+
+  .navbar {
+      height: 20vh; /* Aumenta ainda mais a altura da navbar */
+  }
+
+  .content {
+      margin-left: 40vw; /* Deixa espaço para a sidebar expandida */
+  }
+}

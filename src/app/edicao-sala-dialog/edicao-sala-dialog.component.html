@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Editar Sala</h2>
+<mat-dialog-content>
+  <form [formGroup]="formEdicao">
+    <mat-form-field appearance="outline">
+      <mat-label>Sala</mat-label>
+      <mat-select formControlName="novaSala">
+        <mat-option *ngFor="let sala of todasSalas" [value]="sala.id">
+          {{ sala.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="confirmarAlteracao()">Salvar</button>
+</mat-dialog-actions>
